@@ -1,107 +1,219 @@
 // styles.ts
 import styled from "styled-components";
+import { Card } from "../../../components/Card/styles";
 
-const Card = styled.div`
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-  border: 1px solid #e2e8f0;
-  border-radius: 0.375rem;
-  background-color: #ffffff;
-  color: #2d3748;
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1);
-  padding: 16px;
+const CardCustom = styled(Card)`
   width: 328px;
+  gap: 24px;
+
+  @media screen and (min-width: 1060px) {
+    width: 1048px;
+  }
 `;
 
 const CardContent = styled.div`
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: 8px;
+  display: flex;
+  gap: 16px;
 
-  .header {
-    display: flex;
+  @media screen and (min-width: 1060px) {
+    justify-content: flex-start;
     flex-direction: column;
+  }
+`;
+
+const CardColumns = styled.div`
+  p {
+    display: none;
+  }
+
+  @media screen and (min-width: 1060px) {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 24px 16px;
+
+    p {
+      display: block;
+      font-size: 14px;
+      font-weight: bold;
+      color: #999999;
+      text-transform: uppercase;
+    }
+  }
+`;
+
+const CardItems = styled.div`
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+
+  .card-header_product {
+    display: flex;
+    align-items: center;
     gap: 16px;
 
-    .title-description {
+    .card-header_product_title {
       display: flex;
-      align-items: center;
-      justify-content: space-between;
+      flex-direction: column;
       gap: 8px;
 
-      .header-title-amount {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+      h1 {
+        font-size: 14px;
+        font-weight: bold;
+      }
+      p {
+        font-size: 16px;
+        font-weight: bold;
       }
     }
+  }
 
-    .choice {
+  .card-header_quantity {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+
+    .card-header_quantity_action {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      gap: 8px;
+    }
+  }
+
+  .card-header_subtotal {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 16px;
+
+    p {
+      display: none;
+    }
+
+    span {
+      font-size: 16px;
+      font-weight: bold;
+    }
+  }
+
+  .card-header_trash {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 16px;
+  }
+
+  @media screen and (max-width: 1060px) {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-areas:
+      "product trash"
+      "quantity subtotal";
+
+    .card-header_product {
+      grid-area: product;
+      display: flex;
+      align-items: start;
       gap: 16px;
 
-      .choice-quantity {
-        display: flex;
-        align-items: center;
-        gap: 8px;
+      .card-header_product_image {
+        grid-area: image;
       }
 
-      .choice-subtotal {
+      .card-header_product_title {
+        grid-area: title;
         display: flex;
-        align-items: center;
-        flex-direction: column;
+        gap: 8px;
 
-        p {
-          font-size: 12px;
+        h1 {
+          font-size: 14px;
           font-weight: bold;
-          color: #999999;
+        }
+        p {
+          font-size: 14px;
+          font-weight: bold;
         }
       }
     }
+
+    .card-header_quantity {
+      grid-area: quantity;
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      justify-content: flex-end;
+      gap: 16px;
+      margin: 0 0 0 100px;
+
+      .card-header_quantity_action {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+    }
+
+    .card-header_subtotal {
+      grid-area: subtotal;
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      flex-direction: column;
+      gap: 16px;
+
+      p {
+        display: block;
+        font-size: 12px;
+        font-weight: bold;
+        color: #999999;
+        text-transform: uppercase;
+      }
+
+      span {
+        font-size: 16px;
+        font-weight: bold;
+      }
+    }
+
+    .card-header_trash {
+      grid-area: trash;
+      display: flex;
+      align-items: start;
+      justify-content: flex-end;
+      gap: 16px;
+    }
   }
-`;
-
-const CardTitle = styled.div`
-  font-size: 14px;
-  font-weight: bold;
-`;
-
-const CardDescription = styled.div`
-  font-size: 16px;
-  font-weight: bold;
 `;
 
 const CardFooter = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+  display: grid;
+  grid-template-areas:
+    "total"
+    "btn";
+  grid-gap: 16px;
   font-size: 14px;
 
-  p {
-    font-size: 14px;
-    font-weight: bold;
-    color: #999999;
-  }
+  .card-footer_total {
+    grid-area: total;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
 
-  span {
-    font-size: 24px;
-    font-weight: bold;
-    color: #2f2e41;
-  }
-`;
+    p {
+      font-size: 14px;
+      font-weight: bold;
+      color: #999999;
+      text-transform: uppercase;
+    }
 
-const Button = styled.button`
-  padding: 10px 20px;
-  background-color: #009edd;
-  color: white;
-  border: none;
-  border-radius: 4px;
-  cursor: pointer;
-  text-transform: uppercase;
-  font-weight: bold;
+    span {
+      font-size: 24px;
+      font-weight: bold;
+      color: #2f2e41;
+    }
+  }
+  .card-footer_btn {
+    grid-area: btn;
+  }
 `;
 
 const InputNumber = styled.input.attrs({ type: "number" })`
@@ -116,11 +228,10 @@ const InputNumber = styled.input.attrs({ type: "number" })`
 `;
 
 export {
-  Card,
+  CardColumns,
+  CardCustom,
   CardContent,
-  CardTitle,
-  CardDescription,
+  CardItems,
   CardFooter,
-  Button,
   InputNumber,
 };

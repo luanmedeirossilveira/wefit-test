@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import Button from "../../../components/Button/Button";
 
 const MovieListContainer = styled.div`
   display: flex;
@@ -19,24 +20,12 @@ const MovieListContainer = styled.div`
   }
 `;
 
-const Button = styled.button`
-  background-color: #009edd;
-  border: none;
-  border-radius: 4px;
+const ButtonCustom = styled(Button)<{ bgColor: string }>`
   padding: 8px;
-  text-align: center;
-  text-decoration: none;
-  display: inline-block;
   font-size: 12px;
-  font-weight: bold;
-  cursor: pointer;
   width: 296px;
   height: 40px;
-  color: #ffffff;
-
-  .active {
-    background-color: #039b00;
-  }
+  background-color: ${(props) => props.bgColor};
 `;
 
 const ButtonContent = styled.div`
@@ -105,7 +94,7 @@ const CardFooter = styled.div`
 
 export {
   MovieListContainer,
-  Button,
+  ButtonCustom,
   ButtonContent,
   ButtonShoppingCart,
   CardWrapper,
@@ -114,5 +103,5 @@ export {
   CardTitle,
   CardDescription,
   CardContent,
-  CardFooter
+  CardFooter,
 };

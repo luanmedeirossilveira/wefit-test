@@ -1,7 +1,16 @@
 import { MdAddShoppingCart } from "react-icons/md";
 import { useShoppingCart } from "../../../store/shopping-cart";
 import { formatCurrencyBR } from "../../../utils/formatCurrency";
-import { Button, ButtonContent, ButtonShoppingCart, CardContent, CardDescription, CardTitle, CardWrapper, MovieListContainer } from "./styles";
+import {
+  ButtonCustom,
+  ButtonContent,
+  ButtonShoppingCart,
+  CardContent,
+  CardDescription,
+  CardTitle,
+  CardWrapper,
+  MovieListContainer,
+} from "./styles";
 
 interface MovieListProps {
   products: {
@@ -23,6 +32,12 @@ export default function MovieList({ products }: MovieListProps) {
     return shoppingCart.products.filter((product) => product.id === id).length
   }
 
+  const onButtonActive = (id: string) => {
+    const qtdProduts = shoppingCart.products.filter((product) => product.id === id).length;
+
+    return qtdProduts > 0 ? "#039B00" : "#009edd";
+  }
+
   return (
     <MovieListContainer>
       {products?.map((product) => (
@@ -36,7 +51,10 @@ export default function MovieList({ products }: MovieListProps) {
             />
             <CardTitle>{product.title}</CardTitle>
             <CardDescription>{formatCurrencyBR(product.price)}</CardDescription>
-            <Button className="active" onClick={() => handleAddToCart(product)}>
+            <ButtonCustom
+              bgColor={onButtonActive(product.id)}
+              onClick={() => handleAddToCart(product)}
+            >
               <ButtonContent>
                 <ButtonShoppingCart>
                   <MdAddShoppingCart size={13} />
@@ -44,7 +62,7 @@ export default function MovieList({ products }: MovieListProps) {
                 </ButtonShoppingCart>
                 <span>Adicionar ao Carrinho</span>
               </ButtonContent>
-            </Button>
+            </ButtonCustom>
           </CardContent>
         </CardWrapper>
       ))}

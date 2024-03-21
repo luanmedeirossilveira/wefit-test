@@ -6,6 +6,7 @@ const BaselineContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding: 0px 0px 40px 0px;
 `;
 
 const HeaderContainer = styled.div`

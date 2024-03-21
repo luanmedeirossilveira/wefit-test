@@ -1,5 +1,5 @@
+import CommunicatedCard from "../components/CommunicatedCard/CommunicatedCard";
 import Loading from "../components/Loading/Loading";
-import ReloadPage from "../components/ReloadPage/ReloadPage";
 import MovieList from "./components/MovieList/MovieList";
 import { useQuery } from "react-query";
 
@@ -9,6 +9,10 @@ export default function Home() {
       res.json()
     );
   });
+  
+  const reloadPage = () => {
+      window.location.reload();
+    };
 
   if (isLoading) return <Loading />;
 
@@ -16,11 +20,19 @@ export default function Home() {
 
   const products = data?.products || [];
 
-  if (!products) return <ReloadPage />;
+  if (!products)
+    
+    return (
+      <CommunicatedCard
+        message={`Parece que não há nada por aqui :(`}
+        image="/reload-page.png"
+        buttonTitle="Recarregar página"
+        descriptionImage="wefit"
+        width={178.63}
+        height={265.36}
+        handleNavigate={reloadPage}
+      />
+    );
 
-  return (
-    <>
-      {isLoading ? <Loading /> : <MovieList products={products} />}
-    </>
-  );
+  return <>{isLoading ? <Loading /> : <MovieList products={products} />}</>;
 }
